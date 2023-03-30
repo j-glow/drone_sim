@@ -1,2 +1,2 @@
-export IGN_GAZEBO_RESOURCE_PATH=$HOME/gz_ws/src/ardupilot_gazebo/models:$HOME/gz_ws/src/ardupilot_gazebo/worlds:$IGN_GAZEBO_RESOURCE_PATH
-export IGN_GAZBEO_SYSTEM_PLUGIN_PATH=$HOME/gz_ws/src/ardupilot_gazebo/build:$IGN_GAZEBO_SYSTEM_PLUGIN_PATH
+export IGN_GAZEBO_RESOURCE_PATH=$HOME/ardupilot_gazebo/models:$HOME/ardupilot_gazebo/worlds:$IGN_GAZEBO_RESOURCE_PATH
+export IGN_GAZBEO_SYSTEM_PLUGIN_PATH=$HOME/ardupilot_gazebo/build:$IGN_GAZEBO_SYSTEM_PLUGIN_PATH
