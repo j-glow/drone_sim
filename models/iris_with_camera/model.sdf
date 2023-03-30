@@ -2,7 +2,7 @@
 <sdf version='1.6'>
   <model name='iris_with_camera'>
     <include>
-      <uri>models/iris_with_ardupilot</uri>
+      <uri>model://iris_with_ardupilot</uri>
     </include>
 
     <link name="camera_link">
@@ -26,9 +26,6 @@
             <format>R8G8B8</format> 
           </image>
         </camera>
-        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <frame_name>camera_link_optical</frame_name>
-        </plugin>
       </sensor>
     </link>
 

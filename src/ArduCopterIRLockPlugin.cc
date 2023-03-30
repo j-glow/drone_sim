@@ -15,6 +15,8 @@
  *
 */
 
+#include "ArduCopterIRLockPlugin.hh"
+
 #include <memory>
 #include <functional>
 
@@ -37,59 +39,58 @@
   typedef SSIZE_T ssize_t;
 #endif
 
-#include <ignition/math/Angle.hh>
-#include <ignition/math/Vector3.hh>
-#include <ignition/math/Vector2.hh>
+#include <gz/math/Angle.hh>
+#include <gz/math/Vector3.hh>
+#include <gz/math/Vector2.hh>
 
 #include <gazebo/sensors/CameraSensor.hh>
 #include <gazebo/rendering/Camera.hh>
 #include <gazebo/rendering/Conversions.hh>
 #include <gazebo/rendering/Scene.hh>
-#include <include/SelectionBuffer.hh>
 
-#include "include/ArduCopterIRLockPlugin.hh"
+#include <SelectionBuffer.hh>
 
-using namespace gazebo;
-GZ_REGISTER_SENSOR_PLUGIN(ArduCopterIRLockPlugin)
+GZ_REGISTER_SENSOR_PLUGIN(gazebo::ArduCopterIRLockPlugin)
 
 namespace gazebo
 {
-  class ArduCopterIRLockPluginPrivate
-  {
-    /// \brief Pointer to the parent camera sensor
-    public: sensors::CameraSensorPtr parentSensor;
+class ArduCopterIRLockPluginPrivate
+{
+  /// \brief Pointer to the parent camera sensor
+  public: sensors::CameraSensorPtr parentSensor;
 
-    /// \brief Selection buffer used for occlusion detection
-    public: std::unique_ptr<rendering::SelectionBuffer> selectionBuffer;
+  /// \brief Selection buffer used for occlusion detection
+  public: std::unique_ptr<rendering::SelectionBuffer> selectionBuffer;
 
-    /// \brief All event connections.
-    public: std::vector<event::ConnectionPtr> connections;
+  /// \brief All event connections.
+  public: std::vector<event::ConnectionPtr> connections;
 
-    /// \brief A list of fiducials tracked by this camera.
-    public: std::vector<std::string> fiducials;
+  /// \brief A list of fiducials tracked by this camera.
+  public: std::vector<std::string> fiducials;
 
-    /// \brief Irlock address
-    public: std::string irlock_addr;
+  /// \brief Irlock address
+  public: std::string irlock_addr;
 
-    /// \brief Irlock port for receiver socket
-    public: uint16_t irlock_port;
+  /// \brief Irlock port for receiver socket
+  public: uint16_t irlock_port;
 
-    public: int handle;
+  public: int handle;
 
-    public: struct irlockPacket
-            {
-              uint64_t timestamp;
-              uint16_t num_targets;
-              float pos_x;
-              float pos_y;
-              float size_x;
-              float size_y;
-            };
-  };
-}
+  public: struct irlockPacket
+          {
+            uint64_t timestamp;
+            uint16_t num_targets;
+            float pos_x;
+            float pos_y;
+            float size_x;
+            float size_y;
+          };
+};
+
+}  // namespace gazebo
 
 /////////////////////////////////////////////////
-ignition::math::Vector2i GetScreenSpaceCoords(ignition::math::Vector3d _pt,
+gz::math::Vector2i GetScreenSpaceCoords(gz::math::Vector3d _pt,
     gazebo::rendering::CameraPtr _cam)
 {
   // Convert from 3D world pos to 2D screen pos
@@ -97,7 +98,7 @@ ignition::math::Vector2i GetScreenSpaceCoords(ignition::math::Vector3d _pt,
       _cam->OgreCamera()->getViewMatrix() *
       gazebo::rendering::Conversions::Convert(_pt);
 
-  ignition::math::Vector2i screenPos;
+  gz::math::Vector2i screenPos;
   screenPos.X() = ((pos.x / 2.0) + 0.5) * _cam->ViewportWidth();
   screenPos.Y() = (1 - ((pos.y / 2.0) + 0.5)) * _cam->ViewportHeight();
 
@@ -207,7 +208,7 @@ void ArduCopterIRLockPlugin::OnNewFrame(const unsigned char * /*_image*/,
     if (!camera->IsVisible(vis))
       continue;
 
-    ignition::math::Vector2i pt = GetScreenSpaceCoords(
+    gz::math::Vector2i pt = GetScreenSpaceCoords(
         vis->WorldPose().Pos(), camera);
 
     // use selection buffer to check if visual is occluded by other entities
