@@ -5,18 +5,6 @@
       <uri>model://iris_with_standoffs</uri>
       <name>iris</name>
     </include>
-
-    <link name="camera_link">
-
-      <visual name='camera_visual'>
-        <pose>0 0 0.15 0 3.14159265359 0</pose>
-        <geometry>
-          <box>
-            <size>0.03 0.03 0.07</size>
-          </box>
-        </geometry>
-      </visual>
-
       <sensor name="camera" type="camera">
         <camera>
           <horizontal_fov>1.047</horizontal_fov>
@@ -34,11 +22,5 @@
         <visualize>true</visualize>
         <topic>camera</topic>
       </sensor>
-    </link>
-
-    <joint name='camera_joint' type='fixed'>
-      <parent>iris</parent>
-      <child>camera_link</child>
-    </joint>
   </model>
 </sdf>
