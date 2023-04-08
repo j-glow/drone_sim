@@ -3,7 +3,10 @@
   <model name='iris_with_camera'>
     <include>
       <uri>model://iris_with_standoffs</uri>
-      <name>iris</name>
+    </include>
+
+    <include>
+      <uri>model://downward_camera</uri>
     </include>
 
     <plugin
@@ -11,13 +14,8 @@
       name="ignition::gazebo::systems::Sensors">
     </plugin>
 
-    <include>
-      <uri>model://downward_camera</uri>
-      <pose>0 0 0 0 0 0</pose>
-    </include>
-
-    <joint name="fpv_cam_joint" type="fixed">
-      <child>fpv_cam::link</child>
+    <joint name="downward_camera_joint" type="fixed">
+      <child>downward_camera::link</child>
       <parent>iris_with_standoffs::base_link</parent>
       <axis>
         <xyz>0 0 1</xyz>
