@@ -65,6 +65,7 @@
         <always_on>1</always_on>
         <update_rate>30</update_rate>
         <visualize>1</visualize>
+        <topic>camera</topic>
           <!-- GStreamer camera plugin (needs a lot of CPU! Consider lowering the
              camera image size) -->
         <!-- <plugin name="GstCameraPlugin" filename="libgazebo_gst_camera_plugin.so">
