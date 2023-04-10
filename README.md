@@ -33,7 +33,7 @@ Set the ignition environment variables in your `.bashrc` or `.zshrc` or in  the 
 ### In terminal
 Assuming that you have clone the repository in `$HOME/drone_sim`:
 ```bash
-source setup.bash
+source util/setup.bash
 ```
 
 ### In .bashrc
