@@ -60,9 +60,11 @@ sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON --map --console
 ```
 
 ### Arm and takeoff
+In order to controll the drone one may use SITL terminal and MAVLink commands, eg.:
 
 ```bash
 STABILIZE> mode guided
 GUIDED> arm throttle
 GUIDED> takeoff 5
+GUIDED> mode auto
 ```
