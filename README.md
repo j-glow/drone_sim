@@ -33,7 +33,9 @@ Set the ignition environment variables in your `.bashrc` or `.zshrc` or in  the 
 ### In terminal
 Assuming that you have clone the repository in `$HOME/drone_sim`:
 ```bash
-source util/setup.bash
+export IGN_GAZEBO_SYSTEM_PLUGIN_PATH=$HOME/drone_sim/build:$IGN_GAZEBO_SYSTEM_PLUGIN_PATH
+export IGN_GAZEBO_RESOURCE_PATH=$HOME/drone_sim/models:$HOME/drone_sim/worlds:$IGN_GAZEBO_RESOURCE_PATH
+
 ```
 
 ### In .bashrc
